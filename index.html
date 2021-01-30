@@ -33,20 +33,20 @@
             <h3>Booking Flights</h3>
             <div class="input-group">
                 <label for="">Flying From</label>
-                <input class="inp-style" type="text" name="" placeholder="Dhake, Bangladesh">
+                <input id="from" class="inp-style" type="text" name="" placeholder="Dhake, Bangladesh">
             </div>
             <div class="input-group">
                 <label for="">Flying To</label>
-                <input class="inp-style" type="text" name="" placeholder="New York, United States">
+                <input id="to" class="inp-style" type="text" name="" placeholder="New York, United States">
             </div>
             <div class="inputs">
                 <div class="input-group">
                     <label" for="">Departure</label>
-                    <input class="inp-style" type="date" name="">
+                    <input id="departureDate" class="inp-style" type="date" name="">
                 </div>
                 <div class="input-group">
                     <label for="">Return</label>
-                    <input class="inp-style" type="date" name="">
+                    <input id="returnDate" class="inp-style" type="date" name="">
                 </div>
             </div>
             <div class="input-group f-class">
@@ -96,7 +96,7 @@
                     </div>
                 </div>
             </div>
-            <button class="btn-style">Book Now</button>
+            <button id="bookBtn" class="btn-style" data-toggle="modal" data-target="#exampleModal">Book Now</button>
         </div>
 
         <div class="booking-content">
@@ -105,18 +105,89 @@
         </div>
     </section>
 
+
+    <!-- Modal -->
+    <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+            <h5 class="modal-title" id="exampleModalLabel">Ticket Information</h5>
+            </div>
+            <div class="modal-body">
+                <div class="calculations">
+                    <div class="amount">
+                        <div class="left">
+                            <p>Flying From</p>
+                        </div>
+                        <div class="right">
+                            <p><span id="flyingFrom"></span></p>
+                        </div>
+                    </div>
+                    <div class="amount">
+                        <div class="left">
+                            <p>Flying To</p>
+                        </div>
+                        <div class="right">
+                            <p><span id="flyingTo"></span></p>
+                        </div>
+                    </div>
+                    <div class="amount">
+                        <div class="left">
+                            <p>Departure Date</p>
+                        </div>
+                        <div class="right">
+                            <p><span id="departureDt"></span></p>
+                        </div>
+                    </div>
+                    <div class="amount">
+                        <div class="left">
+                            <p>Return Date</p>
+                        </div>
+                        <div class="right">
+                            <p><span id="returnDt"></span></p>
+                        </div>
+                    </div>
+                    <div class="amount">
+                        <div class="left">
+                            <p>Subtotal</p>
+                        </div>
+                        <div class="right">
+                            <p>$<span id="subtotalInfo"></span></p>
+                        </div>
+                    </div>
+    
+                    <div class="amount">
+                        <div class="left">
+                            <p>Charge 10% VAT</p>
+                        </div>
+                        <div class="right">
+                            <p>$<span id="vatInfo"></span></p>
+                        </div>
+                    </div>
+                    <hr>
+                    <div class="amount">
+                        <div class="left">
+                            <h4>Total</h4>
+                        </div>
+                        <div class="right">
+                            <p>$<span id="totalInfo"></span></p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+            <button id="ok" type="button" class="btn btn-primary">OK</button>
+            </div>
+        </div>
+        </div>
+    </div>
+
+
     <!--Thank You-->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.js" integrity="sha256-DrT5NfxfbHvMHux31Lkhxg42LY6of8TaYyK50jnxRnM=" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/js/bootstrap.bundle.min.js" integrity="sha384-ygbV9kiqUc6oa4msXn9868pTtWMgiQaeYH7/t7LECLbyPA2x65Kgf80OJFdroafW" crossorigin="anonymous"></script>
 
     <script>
-        // const increase = document.getElementsByClassName('increase');
-        // // increase.addEventListener('click', function (event) {
-        // //     console.log("Hello");
-        // // });
-        // for(let i = 0; i < increase.length; i++) {
-        //     increase[i].addEventListener("click", function() {
-                
-        //     });
-        // }
 
         const increase1 = document.getElementById('increase1');
         const increase2 = document.getElementById('increase2');
@@ -159,7 +230,7 @@
         decrease2.addEventListener('click', function(){
             if(eClassInp.value > 0)
                 eClassInp.value--;
-                
+
                 updateValues(fClassInp.value, 150, eClassInp.value, 100);
              //   updateValues(((-1) * eClassInp.value), 100);
         });
@@ -174,9 +245,37 @@
             total.innerText = totalAmount;
         }
 
+
+        $(document).ready(function(){
+
+           $('#bookBtn').on('click', function(){
+               //console.log($('#from').val());
+               $('#flyingFrom').html($('#from').val());
+               //console.log($('#to').val());
+               $('#flyingTo').html($('#to').val());
+              // console.log($('#departureDate').val());
+               $('#departureDt').html($('#departureDate').val());
+             //  console.log($('#returnDate').val());
+               $('#returnDt').html($('#returnDate').val());
+
+               $('#subtotalInfo').html($('#subtotal').html());
+               $('#vatInfo').html($('#vat').html());
+               $('#totalInfo').html($('#total').html());
+
+               $('#exampleModal').modal('show');
+           });
+
+           $('#ok').on('click', function(){
+               console.log("bye");
+               $('#exampleModal').modal('hide');
+           });
+
+        });
+
     </script>
 
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/js/bootstrap.bundle.min.js" integrity="sha384-ygbV9kiqUc6oa4msXn9868pTtWMgiQaeYH7/t7LECLbyPA2x65Kgf80OJFdroafW" crossorigin="anonymous"></script>
+
+    
 </body>
 
 </html>
